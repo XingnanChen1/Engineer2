@@ -51,7 +51,7 @@ If you are familiar with VC++, all the steps are easy to understand.
 
 Briefly speaking, if you follow every step of the instruction, you shouldn't meet any problem. When I see anything is not as expected, I just read the description again carefully and correct the mistakes, every problem can be solved without googling anything.
 
-### Questions:
+### Questions & Answering:
 #### Tell us which projects needed to add a reference to the new Graphics project? Did you find any projects whose code mentioned the Graphics namespace, but didn't need a reference added? If so, give an example, and explain why the code in question doesn't require a reference. 
 Application needs to add the Graphics project reference.
 ShaderBuilder has Graphics namespace but doesn’t need the reference because ShaderBuider doesn’t use any function from Graphics namespace.
