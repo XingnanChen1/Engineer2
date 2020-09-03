@@ -1,37 +1,45 @@
-## Welcome to GitHub Pages
+## Assignment 01 Write-up
 
-You can use the [editor on GitHub](https://github.com/XingnanChen/Engineer3/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### Downloads:
+[MyGame_x86](https://github.com/XingnanChen/Engineer2/raw/master/MyGame_.zip)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Assignment Objectives：
+1. Create a static library and set up the configurations of it.
+2. Create and configure my own game project; Log messages at the beginning and end of the game life cycle.
+3. Make an animation that changing the triangle color by creating a new fragment shader.
 
-### Markdown
+### ScreenShots 
+Animation  
+![Image](AnimateColor.gif)  
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Log Message  
+![Image](LogPic.png)  
 
-```markdown
-Syntax highlighted code block
+### Implementation:
+1. Static library: Create a project as lib; Change some configurations; Find the references from&to it.
+2. Game project: Create MyGame from ExampleGame(Note: change GUID and GameName in project settings); Create MyGameAssets; Set default startup project.
+3. Animate color: Change the code in *.Shader (Direct3D uses vec4, OpenGL uses float4). The range of RGB is [0,1].   
 
-# Header 1
-## Header 2
-### Header 3
+### Questions:
+#### Tell us which projects needed to add a reference to the new Graphics project? Did you find any projects whose code mentioned the Graphics namespace, but didn't need a reference added? If so, give an example, and explain why the code in question doesn't require a reference. 
+Application needs to add the Graphics project reference.
+ShaderBuilder has Graphics namespace but doesn’t need the reference because ShaderBuider doesn’t use the functions from Graphics project.
 
-- Bulleted
-- List
+#### Tell us about any thoughts you have about the engine code base that has been provided to you. How is it organized?  
+The engine code base is well organized. 
 
-1. Numbered
-2. List
+#### Is there anything that you like or don't like about the organization? 
+I like it, it separates input and output. 
 
-**Bold** and _Italic_ and `Code` text
+#### What do you think of the code style?
+Good.
 
-[Link](url) and ![Image](src)
-```
+#### Is there anything that you like or don't like about it?
+Nothing.
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+#### Is there anything that you were initially confused about? Tell us why you were confused and what you figured out to not be confused. 
+At first, I added the Graphics reference to the MyGame project. The solution can be built. I found Application project were using functions from Graphics project without having reference and the MyGame project didn’t use Graphics functions. Then I deleted the Graphics reference to MyGame and added it to Application project.
 
-### Jekyll Themes
+#### Discuss briefly your expectations of the class based on the first lecture and what you know so far, and tell us what you hope to learn from it. Take some time and think about what you personally might be able to get out of the class that aligns with your interests.
+I am interested in how to write an organized engine and learn more about shader and rendering techniques. 
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/XingnanChen/Engineer3/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
