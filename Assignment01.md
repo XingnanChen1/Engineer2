@@ -1,7 +1,11 @@
 ## Assignment 01 Write-up
 
 ### Downloads:
-[MyGame_x86](https://github.com/XingnanChen/Engineer2/raw/master/MyGame_.zip)
+[MyGame_x86_debug](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x86_debug.zip)
+[MyGame_x86_release](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x86_release.zip)
+[MyGame_x64_debug](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x64_debug.zip)
+[MyGame_x64_releasse](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x64_releasse.zip)
+
 
 ### Assignment Objectives：
 1. Create a static library and set up the configurations of it.
@@ -10,10 +14,10 @@
 
 ### ScreenShots 
 Animation  
-![Image](AnimateColor.gif)  
+![Image](Assignment01/AnimateColor.gif)  
 
 Log Message  
-![Image](LogPic.png)  
+![Image](Assignment01/LogPic.png)  
 
 ### Implementation:
 1. Static library: Create a project as lib; Change some configurations; Find the references from&to it.
