@@ -1,10 +1,10 @@
 ## Assignment 01 Write-up
 
 ### Downloads:
-[MyGame_x86_debug](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x86_debug.zip)
-[MyGame_x86_release](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x86_release.zip)
-[MyGame_x64_debug](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x64_debug.zip)
-[MyGame_x64_releasse](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x64_releasse.zip)
+[MyGame_x86_debug](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x86_debug.zip)  
+[MyGame_x86_release](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x86_release.zip)  
+[MyGame_x64_debug](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x64_debug.zip)  
+[MyGame_x64_releasse](https://github.com/XingnanChen/Engineer2/raw/master/Assignment01/MyGame_x64_releasse.zip)  
 
 
 ### Assignment Objectives：
