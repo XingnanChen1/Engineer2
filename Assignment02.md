@@ -10,10 +10,8 @@
 
 ### ScreenShots 
 Animation  
-![Image](AnimateColor.gif)  
-
-Log Message  
-![Image](LogPic.png)  
+![Image](gamerunning.gif)  
+ 
 
 ### Implementation:
 1. Create a mesh class and extract the mesh functions from graphics.[platform].cpp.  
@@ -25,9 +23,17 @@ Log Message
 2. Create a shader class and extract the shader functions from graphics.[platform].cpp.(Bind&Initialize&Cleanup).  
     Specific steps are the same as creating the mesh class.
 3. Replace the code in graphics with mesh and shader class.
-screenshot: draw&bind
+```cpp
+    s_mesh.draw();
+    s_effect.bind();
+```
 4. Add another triangle to mesh. Add the triangle count from 1 to 2. Then add three vertices to the vertex array.
-5. GPU debugger
-    a.Direct3D GPU capture
-    b.OpenGL GPU capture
-
+5. GPU debugger  
+    a.Direct3D GPU capture  
+    ![Image](d3d-black.png)    
+    ![Image](d3d-mesh.png)    
+    ![Image](d3d-wareframe.png)  
+    b.OpenGL GPU capture  
+    ![Image](gl-black.png)    
+    ![Image](gl-mesh.png)    
+    ![Image](gl-wareframe.png)  
