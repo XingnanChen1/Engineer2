@@ -1,7 +1,8 @@
 ## Assignment 02 Write-up
 
 ### Downloads:
-[MyGame_x86](https://github.com/XingnanChen/Engineer2/raw/master/MyGame_.zip)
+[MyGame_x86](https://github.com/XingnanChen/Engineer2/raw/master/Assignment02/MyGame_x86.zip)  
+[MyGame_x64](https://github.com/XingnanChen/Engineer2/raw/master/Assignment02/MyGame_x64.zip)  
 
 ### Assignment Objectives：
 1. Learn about platform-specific and platform-independent implementation.
