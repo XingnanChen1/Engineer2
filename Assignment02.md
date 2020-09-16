@@ -10,7 +10,7 @@
 
 ### ScreenShots 
 Animation  
-![Image](gamerunning.gif)  
+![Image](Assignment02/gamerunning.gif)  
  
 
 ### Implementation:
@@ -30,10 +30,10 @@ Animation
 4. Add another triangle to mesh. Add the triangle count from 1 to 2. Then add three vertices to the vertex array.
 5. GPU debugger  
     a.Direct3D GPU capture  
-    ![Image](d3d-black.png)    
-    ![Image](d3d-mesh.png)    
-    ![Image](d3d-wareframe.png)  
+    ![Image](Assignment02/d3d-black.png)    
+    ![Image](Assignment02/d3d-mesh.png)    
+    ![Image](Assignment02/d3d-wareframe.png)  
     b.OpenGL GPU capture  
-    ![Image](gl-black.png)    
-    ![Image](gl-mesh.png)    
-    ![Image](gl-wareframe.png)  
+    ![Image](Assignment02/gl-black.png)    
+    ![Image](Assignment02/gl-mesh.png)    
+    ![Image](Assignment02/gl-wareframe.png)  
