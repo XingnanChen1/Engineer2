@@ -1,7 +1,9 @@
 ## Assignment 03 Write-up
 
 ### Downloads: 
-//Todo [MyGame_x86](https://github.com/XingnanChen/Engineer2/raw/master/MyGame_.zip)
+[MyGame_x86](https://github.com/XingnanChen/Engineer2/blob/master/Assignment03/MyGame_x86.zip?raw=true)
+[MyGame_x64](https://github.com/XingnanChen/Engineer2/blob/master/Assignment03/MyGame_x64.zip?raw=true)
+
 
 ### Assignment Objectives：
 1. Make graphics system platform-independent.  
@@ -13,9 +15,9 @@ Optional Challenges:
 
 5. change background color dynamically
 
-### ScreenShots //todo
-Animation  
-![Image](Assignment02/gamerunning.gif)  
+### ScreenShots
+Game Running  
+![Image](Assignment03/gamerunning.gif)  
  
 ### Implementation:
 When combining platform-specific codes into Graphics.cpp, we need to find out the platform-specific parts. Most of the platform-specific parts are managing buffers such as clearing the image buffer and depth buffer. Thus, I created a class called cBufferManager to encapsulate these functions, (maybe creating a namespace should be more suitable if we regard these features as Graphics' utility/helper function rather than buffer management). I declared the interfaces in the cBufferManager header file and implemented those interfaces in the corresponding platform-specific cpp file, and exclude build from the platform which it doesn't belongs to.  
@@ -24,8 +26,8 @@ In cBufferManager class, I declared these interfaces: ClearColor(), ClearDepth()
 For example, clearing the back image buffer:  
 ```cpp
 c_buffer_manager.ClearColor(
-        (sin(elapsedSecondCount_simulationTime) + 1) / 2, 
-        (1 + cos(elapsedSecondCount_simulationTime)) / 2,
+        (sinf(elapsedSecondCount_simulationTime) + 1) / 2, 
+        (1 + cosf(elapsedSecondCount_simulationTime)) / 2,
         0.f);
 ```  
 
