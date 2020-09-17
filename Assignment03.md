@@ -23,10 +23,13 @@ In cBufferManager class, I declared these interfaces: ClearColor(), ClearDepth()
 
 For example, clearing the back image buffer:  
 ```cpp
-s_buffer_manager.ClearColor(1.f, 0.f, 0,f);  
+c_buffer_manager.ClearColor(
+        (sin(elapsedSecondCount_simulationTime) + 1) / 2, 
+        (1 + cos(elapsedSecondCount_simulationTime)) / 2,
+        0.f);
 ```  
 
-From the game running gif at the begining, we can see the background color is set to red. 
+From the game running gif at the begining, we can see the background color is changing dynamically. 
  
 The effect initialization codes are like:  
 
