@@ -41,4 +41,4 @@ Animation
 
 Basically this assignment is not hard and I didn't spend too much time. 
 
-To make Graphics system interface platform independent, code related to shader pipeline should be put in each own platform specific cpp file. The part that the code are same in graphics.d3d.cpp and graphics.gl.cpp should be platform independent implementation.
+To make Graphics system interface platform independent, code related to shader pipeline should be put in each own platform's specific cpp file. The part that the code are same in graphics.d3d.cpp and graphics.gl.cpp should be implemented platform independently.
