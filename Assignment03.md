@@ -25,7 +25,7 @@ In cBufferManager class, I declared these interfaces: ClearColor(), ClearDepth()
 
 For example, clearing the back image buffer:  
 ```cpp
-c_buffer_manager.ClearColor(
+s_buffer_manager.ClearColor(
         (sinf(elapsedSecondCount_simulationTime) + 1) / 2, 
         (1 + cosf(elapsedSecondCount_simulationTime)) / 2,
         0.f);
@@ -108,7 +108,7 @@ uint16_t indexData[indexCount]
 };
 
 //use OpenGl right handed rule by default (counter clockwise)
-if (!(result = c_mesh.InitializeGeometry(vertexData, vertexCount, indexData, indexCount)))
+if (!(result = s_mesh.InitializeGeometry(vertexData, vertexCount, indexData, indexCount)))
 {
     EAE6320_ASSERTF(false, "Can't initialize Graphics without the geometry data");
     return result;
@@ -133,15 +133,15 @@ my mesh object takes 16 bytes in OpenGL and 24 bytes in D3D.
 These are members from mesh class:
 ```cpp
 #if defined( EAE6320_PLATFORM_D3D )
-    cVertexFormat* s_vertexFormat = nullptr;
-    ID3D11Buffer* s_vertexBuffer = nullptr;
-    ID3D11Buffer* s_indexBuffer = nullptr;
+    cVertexFormat* m_vertexFormat = nullptr;
+    ID3D11Buffer* m_vertexBuffer = nullptr;
+    ID3D11Buffer* m_indexBuffer = nullptr;
 
 #elif defined( EAE6320_PLATFORM_GL )
-    GLuint s_programId = 0;
-    GLuint s_vertexBufferId = 0;
-    GLuint s_vertexArrayId = 0;
-    GLuint s_indexBufferId = 0;
+    GLuint m_programId = 0;
+    GLuint m_vertexBufferId = 0;
+    GLuint m_vertexArrayId = 0;
+    GLuint m_indexBufferId = 0;
 
 #endif
 ```
