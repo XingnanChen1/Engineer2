@@ -1,7 +1,7 @@
 ## Assignment 03 Write-up
 
 ### Downloads: 
-[MyGame_x86](https://github.com/XingnanChen/Engineer2/blob/master/Assignment03/MyGame_x86.zip?raw=true)
+[MyGame_x86](https://github.com/XingnanChen/Engineer2/blob/master/Assignment03/MyGame_x86.zip?raw=true)  
 [MyGame_x64](https://github.com/XingnanChen/Engineer2/blob/master/Assignment03/MyGame_x64.zip?raw=true)
 
 
@@ -17,7 +17,7 @@ Optional Challenges:
 
 ### ScreenShots
 Game Running  
-![Image](Assignment03/gamerunning.gif)  
+![Image](Assignment03/gameRunning.gif)  
  
 ### Implementation:
 When combining platform-specific codes into Graphics.cpp, we need to find out the platform-specific parts. Most of the platform-specific parts are managing buffers such as clearing the image buffer and depth buffer. Thus, I created a class called cBufferManager to encapsulate these functions, (maybe creating a namespace should be more suitable if we regard these features as Graphics' utility/helper function rather than buffer management). I declared the interfaces in the cBufferManager header file and implemented those interfaces in the corresponding platform-specific cpp file, and exclude build from the platform which it doesn't belongs to.  
