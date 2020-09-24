@@ -30,7 +30,7 @@ Graphics::SubmitBackgroundColor((sinf(i_elapsedSecondCount_systemTime) + 1) / 2,
 2. Reference Counting is used to determine when a pointer should be deleted.  
 Using cMesh as an example:   
 In cMesh class:   
-- Add the header and three macros in cMesh class. 
+- Add the header and three macros in cMesh class.  
 header:  
 ```cpp
   <Engine/Assets/ReferenceCountedAssets.h>  
@@ -53,7 +53,7 @@ The usage of the interface looks as following:
 ```cpp
 struct sVertex_mesh  
 {  
-		float x, y, z;  
+	float x, y, z;  
 } 
 struct meshData
 {
