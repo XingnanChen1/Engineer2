@@ -1,9 +1,9 @@
 
-## Assignment 03 Write-up
+## Assignment 04 Write-up
 
 ### Downloads: 
-[MyGame_x86](https://github.com/XingnanChen/Engineer2/blob/master/Assignment03/MyGame_x86.zip?raw=true)  
-[MyGame_x64](https://github.com/XingnanChen/Engineer2/blob/master/Assignment03/MyGame_x64.zip?raw=true)
+[MyGame_x86](https://github.com/XingnanChen/Engineer2/blob/master/Assignment04/MyGame_x86.zip?raw=true)  
+[MyGame_x64](https://github.com/XingnanChen/Engineer2/blob/master/Assignment04/MyGame_x64.zip?raw=true)
 
 
 ### Assignment Objectives：
@@ -14,39 +14,47 @@
 
 ### ScreenShots
 Game Running  
-![Image](Assignment03/gameRunning.gif)  
+![Image](Assignment04/gameRunning.gif)  
  
 ### Implementation:
 1. Submitting Background Color:  
 (1) Create a SubmitBackgroundColor() function in Graphics to save the data from MyGame to s_DataBeingSubmittedByApplicationThread.   
-(2) Implement the SubmitDataToBeRendered() function(which is inherited from iApplication) in MyGame to submit the color data to Graphic by calling the submission functions exposed by Graphics.  
-```Graphics::SubmitBackgroundColor((sinf(i_elapsedSecondCount_systemTime) + 1) / 2,(1 + cosf(i_elapsedSecondCount_systemTime)) / 2,0.f, 1);  ``` 
-(3)When rendering the background color by using ClearUp, I use the cached data from s_dataBeingRenderedByRenderThread.   
+(2) Implement the SubmitDataToBeRendered() function(which is inherited from iApplication) in MyGame to submit the color data to Graphic by calling the submission functions exposed by Graphics. 
+
+```cpp
+Graphics::SubmitBackgroundColor((sinf(i_elapsedSecondCount_systemTime) + 1) / 2,(1 + cosf(i_elapsedSecondCount_systemTime)) / 2,0.f, 1);  
+```  
+
+(3) When rendering the background color by using ClearUp, I use the cached data from s_dataBeingRenderedByRenderThread.   
 
 2. Reference Counting is used to determine when a pointer should be deleted.  
 Using cMesh as an example:   
 In cMesh class:   
-(1) Add the header and three macros in cMesh class.  
-  header:  <Engine/Assets/ReferenceCountedAssets.h>  
+(1) Add the header and three macros in cMesh class. 
+  header:  
+```cpp
+  <Engine/Assets/ReferenceCountedAssets.h>  
+```
   macros:  
+```cpp
   EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()  
   EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS( cMesh )  
   EAE6320_ASSETS_DECLAREREFERENCECOUNT()  
+```
 (2) Change the constructor, deconstructor, and initialize function to private. 
-(3) Create a factory function called Load() to initialize and return cMesh object.    
+(3) Create a factory function called Load() to initialize and return a cMesh object.    
 
 3. Submitting Meshes and Effects pairs:  
 (1) In Graphics:  
-Create SubmitMeshAndEffect() function and expose it to MyGame to receive the data. Then cache those meshes and effects into s_DataBeingSubmittedByApplicationThread.  Since we are using two copis of the data to synchronize the application loop thread and the render thread. We can’t render with data directly and have to cache it first. After the previous frame is rendered, the cached data will be swap to the current rendering data and then the current frame will be rendered.  
+Create SubmitMeshAndEffect() function and expose it to MyGame to receive the data. Then cache those meshes and effects into s_DataBeingSubmittedByApplicationThread. Since we are using two copies of the data to synchronize the application loop thread and the render thread. We can’t render the data directly and have to cache it first. After the previous frame is rendered, the cached data will be swap to the current rendering data and then the current frame will be rendered.  
 (2) In MyGame:  
-Put all meshes and effects data into SubmitDataToBeRendered() function by creating array of mesh and effect struct. Then give the data by using SubmitMeshAndEffectData() function to Graphics.  
- ```
+Initialize all meshes and effects data in SubmitDataToBeRendered() function by creating array of meshdata and effectdata struct. Then invoke SubmitMeshAndEffectData() function to submit the data to render thread. 
+The usage of the interface looks as following:
+```cpp
 struct sVertex_mesh  
 {  
 		float x, y, z;  
 } 
- ``` 
-```
 struct meshData
 {
 	eae6320::Graphics::VertexFormats::sVertex_mesh* vertexData;
@@ -54,52 +62,62 @@ struct meshData
 	uint16_t* indexData;
 	size_t indexCount;
 }; 
-``` 
-```
 struct effectData
 {
 	std::string vertextShaderPath;
 	std::string fragmentShaderPath;
 };
-``` 
- 
 ```
-const size_t vertexCount = 4;
-Graphics::VertexFormats::sVertex_mesh vertexData[vertexCount];
-{
-	// OpenGL is right-handed
- 
+First define the data in myGame class:
+ ```cpp
+	eae6320::Graphics::VertexFormats::sVertex_mesh* vertexData;
+	eae6320::Graphics::VertexFormats::sVertex_mesh* vertexData_b;
+
+	uint16_t* indexData;
+	uint16_t* indexData_b;
+
+	meshData* meshdata;
+	effectData* effectdata;
+```
+Then init the data and submit it:
+
+ ```cpp
+	vertexData = new Graphics::VertexFormats::sVertex_mesh[vertexCount];
+	{
 		vertexData[0].x = 0.0f;
 		vertexData[0].y = 0.0f;
 		vertexData[0].z = 0.0f;
- 
+
 		vertexData[1].x = 0.8f;
 		vertexData[1].y = 0.0f;
 		vertexData[1].z = 0.0f;
- 
+
 		vertexData[2].x = 0.8f;
 		vertexData[2].y = 0.8f;
 		vertexData[2].z = 0.0f;
- 
+
 		vertexData[3].x = 0.0f;
 		vertexData[3].y = 0.8f;
 		vertexData[3].z = 0.0f;
-}
+	}
 	const size_t indexCount = 6;
-	uint16_t indexData[indexCount]
+
+	indexData = new uint16_t[indexCount];
 	{
-		0,1,2,0,2,3
-	};
- ```  
- 
-	
-```
-meshData meshdata = { vertexData,vertexCount,indexData,indexCount };
-effectData effectdata = { "data/Shaders/Vertex/standard.shader", "data/Shaders/Fragment/myShader.shader" };
-```  
- 
-```
-//parameters are meshdata effectdata and mesh_effect_pair_counts
+		indexData[0] = 0;
+		indexData[1] = 1;
+		indexData[2] = 2;
+		indexData[3] = 0;
+		indexData[4] = 2;
+		indexData[5] = 3;
+	}
+
+	meshdata = { vertexData,vertexCount,indexData,indexCount };
+
+
+	effectdata = { "data/Shaders/Vertex/standard.shader", "data/Shaders/Fragment/myShader.shader" };
+
+	//parameters are meshdata effectdata and mesh_effect_pair_counts
 	Graphics::SubmitMeshAndEffect(meshdata, effectdata, 1);
 ```  
  
