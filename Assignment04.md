@@ -48,7 +48,8 @@ EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 - Change the constructor, deconstructor, and initialize function to private.  
 - Create a factory function called Load() to initialize and return a cMesh object.   
 
-3. Submitting Meshes and Effects pairs:  
+3. Submitting Meshes and Effects pairs  
+
 In Graphics:  
 Create SubmitMeshAndEffect() function and expose it to MyGame to receive the data. Then cache those meshes and effects into s_DataBeingSubmittedByApplicationThread. Since we are using two copies of the data to synchronize the application loop thread and the render thread. We can’t render the data directly and have to cache it first. After the previous frame is rendered, the cached data will be swap to the current rendering data and then the current frame will be rendered.  
 
@@ -58,7 +59,7 @@ Initialize all meshes and effects data in SubmitDataToBeRendered() function by c
 struct sVertex_mesh  
 {  
 	float x, y, z;  
-} 
+}; 
 struct meshData
 {
 	eae6320::Graphics::VertexFormats::sVertex_mesh* vertexData;
