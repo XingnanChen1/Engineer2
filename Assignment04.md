@@ -2,8 +2,8 @@
 ## Assignment 04 Write-up
 
 ### Downloads: 
-[MyGame_x86](https://github.com/XingnanChen/Engineer2/blob/master/Assignment04/MyGame_x86.zip?raw=true)  
-[MyGame_x64](https://github.com/XingnanChen/Engineer2/blob/master/Assignment04/MyGame_x64.zip?raw=true)
+[MyGame_x86](https://github.com/XingnanChen/Engineer2/blob/master/Assignment04/MyGame_OpenGL.zip?raw=true)  
+[MyGame_x64](https://github.com/XingnanChen/Engineer2/blob/master/Assignment04/MyGame_D3D.zip?raw=true)
 
 
 ### Assignment Objectives：
@@ -14,7 +14,7 @@
 
 ### ScreenShots
 Game Running  
-![Image](Assignment04/gameRunning.gif)  
+![Image](Assignment04/gamerunning.gif)  
  
 ### Implementation:
 1. Submitting Background Color:  
