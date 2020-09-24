@@ -120,24 +120,64 @@ Then init the data and submit it:
 	//parameters are meshdata effectdata and mesh_effect_pair_counts
 	Graphics::SubmitMeshAndEffect(meshdata, effectdata, 1);
 ```  
- 
- 	
-Tell us the sizeof(YOUR MESH) in both platforms after you have made it reference counted (use the compiler or debugger to tell you the exact sizeof())
-Show us the data members
-Is there any way that you could make it smaller? (If so, you should!)
-Is there any way that you could make it bigger? (If so, don't!)
-(I am specifically asking about your mesh representation and what data it's required to store and how that data is laid out. Yes, you could add random member variables that don't do anything to make it any arbitrarily large size, but that's not what I'm asking. Instead, tell us: Is there any way to change the member variables that you currently have to make it smaller? Is there any way that you could reorder the member variables that you have to make it smaller or bigger? If so, tell us specifically what you could do.)
-Tell us the sizeof(YOUR EFFECT) in both platforms after you have made it reference counted (use the compiler or debugger to tell you the exact sizeof())
-Show us the data members
-Is there any way that you could make it smaller? (If so, you should!)
-Is there any way that you could make it bigger? (If so, don't!)
-(I am specifically asking about your effect representation. See the explanation above about meshes and answer the same specific questions for your effects.)
-Tell us the total memory that you have budgeted to your Graphics project for data to render frames
-You will have to do some math for this. There are:
-2 sDataRequiredToRenderAFrame structs
-Each of those structs will have a size (use sizeof() to make sure you get an accurate count)
-Some of the data stored in those structs may be pointers. You will have to decide whether the memory that these pointers point at should be included or not.
- 
- 
-4. Respinding to input
+The meshdata took 16 bytes on OpenGL and 32 bytes on D3D;  
+The effectdata took 56 bytes on OpenGL and 80 bytes on D3D;
+We can't make it any smaller since all these data are needed for graphics engine to render the frame. 
+For meshdata, all memebers takes 4 byte, reordred won't affect anything. And the vertex data and the index data are already in the form of pointer.
+For effectdata, these memebers are just std::string, there isn't too much thing we can do to reduce it's size.
 
+
+The sDataRequiredToRenderAFrame struct is defined as:
+```cpp
+struct sDataRequiredToRenderAFrame
+{
+	eae6320::Graphics::ConstantBufferFormats::sFrame constantData_frame;
+	//background color
+	float r, g, b, a;
+
+	//mesh
+
+	meshData* meshdatas[2];
+	effectData* effectsdatas[2];
+
+	size_t mesh_effect_count;
+
+};
+```
+
+On OpenGL platform:
+constantData_frame takes 144 bytes;
+background color takes 4 * 4 = 16 bytes;
+meshdatas takes 16 * 2 = 32 bytes;
+effectData takes 56 * 2 = 112 bytes;
+mesh_effect_count takes 4 bytes;
+
+The struct takes 144 + 16 + 32 + 112 + 4 = 308 bytes;
+Since there are two copies of the struct, it takes 616 bytes in total.
+
+On D3D platform:
+constantData_frame takes 144 bytes;
+background color takes 4 * 4 = 16 bytes;
+meshdatas takes 32 * 2 = 64 bytes;
+effectData takes 80 * 2 = 160 bytes;
+mesh_effect_count takes 8 bytes;
+
+The struct takes 144 + 16 + 64 + 160 + 8 = 392 bytes;
+Since there are two copies of the struct, it takes 784 bytes in total.
+
+4. Responding to input
+
+To make rendering data is controlled by users' input, we have to implement the UpdateSimulationBasedOnInput() function. We can declare a bool state variable such as "isSecondMeshRemoved" in our game. And change the state of it based on the input int UpdateSimulationBasedOnInput() function. And finally in SubmitDataToBeRendered() function,
+we changed the submit data by the state of "isSecondMeshRemoved" like:
+```cpp
+if(isSecondMeshRemoved)
+{
+	Graphics::SubmitMeshAndEffect(meshdata, effectdata, 1);
+}else
+{
+	Graphics::SubmitMeshAndEffect(meshdata, effectdata, 2);
+}
+```
+Then our game simulation status will respond to user's input correctly.
+
+To make the game simulate based on time, we can implement the UpdateSimulationBasedOnTime() function in our game. Use the similar idea from responding the input, we can change the state based on time instead of input. Using the same method, we can easily make our bottom mesh blink every second elapesed!
