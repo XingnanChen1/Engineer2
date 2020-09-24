@@ -163,20 +163,17 @@ effectData takes 80 * 2 = 160 bytes;
 mesh_effect_count takes 8 bytes;
 
 The struct takes 144 + 16 + 64 + 160 + 8 = 392 bytes;
-Since there are two copies of the struct, it takes 784 bytes in total.
+Since there are two copies of the struct, it takes 784 bytes in total.  
 
 4. Responding to input
 
-To make rendering data is controlled by users' input, we have to implement the UpdateSimulationBasedOnInput() function. We can declare a bool state variable such as "isSecondMeshRemoved" in our game. And change the state of it based on the input int UpdateSimulationBasedOnInput() function. And finally in SubmitDataToBeRendered() function,
+To make rendering data is controlled by users' input, we have to implement the UpdateSimulationBasedOnInput() function. We can declare a bool state variable such as "isSecondMeshRemoved" in our game. And change the state of it based on the input in UpdateSimulationBasedOnInput() function. And finally in SubmitDataToBeRendered() function,
 we changed the submit data by the state of "isSecondMeshRemoved" like:
 ```cpp
 if(isSecondMeshRemoved)
-{
 	Graphics::SubmitMeshAndEffect(meshdata, effectdata, 1);
-}else
-{
+else
 	Graphics::SubmitMeshAndEffect(meshdata, effectdata, 2);
-}
 ```
 Then our game simulation status will respond to user's input correctly.
 
