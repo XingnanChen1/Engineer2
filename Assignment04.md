@@ -25,7 +25,7 @@ Game Running
 Graphics::SubmitBackgroundColor((sinf(i_elapsedSecondCount_systemTime) + 1) / 2,(1 + cosf(i_elapsedSecondCount_systemTime)) / 2,0.f, 1);  
 ```  
 
-(3) When rendering the background color by using ClearUp, I use the cached data from s_dataBeingRenderedByRenderThread.   
+- When rendering the background color by using ClearUp, I use the cached data from s_dataBeingRenderedByRenderThread.   
 
 2. Reference Counting is used to determine when a pointer should be deleted.  
 Using cMesh as an example:   
