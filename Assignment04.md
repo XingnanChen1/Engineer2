@@ -18,8 +18,8 @@ Game Running
  
 ### Implementation:
 1. Submitting Background Color:  
-(1) Create a SubmitBackgroundColor() function in Graphics to save the data from MyGame to s_DataBeingSubmittedByApplicationThread.   
-(2) Implement the SubmitDataToBeRendered() function(which is inherited from iApplication) in MyGame to submit the color data to Graphic by calling the submission functions exposed by Graphics. 
+- Create a SubmitBackgroundColor() function in Graphics to save the data from MyGame to s_DataBeingSubmittedByApplicationThread.   
+- Implement the SubmitDataToBeRendered() function(which is inherited from iApplication) in MyGame to submit the color data to Graphic by calling the submission functions exposed by Graphics. 
 
 ```cpp
 Graphics::SubmitBackgroundColor((sinf(i_elapsedSecondCount_systemTime) + 1) / 2,(1 + cosf(i_elapsedSecondCount_systemTime)) / 2,0.f, 1);  
@@ -30,24 +30,24 @@ Graphics::SubmitBackgroundColor((sinf(i_elapsedSecondCount_systemTime) + 1) / 2,
 2. Reference Counting is used to determine when a pointer should be deleted.  
 Using cMesh as an example:   
 In cMesh class:   
-(1) Add the header and three macros in cMesh class. 
-  header:  
+- Add the header and three macros in cMesh class. 
+header:  
 ```cpp
   <Engine/Assets/ReferenceCountedAssets.h>  
 ```
-  macros:  
+macros:  
 ```cpp
   EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()  
   EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS( cMesh )  
   EAE6320_ASSETS_DECLAREREFERENCECOUNT()  
 ```
-(2) Change the constructor, deconstructor, and initialize function to private. 
-(3) Create a factory function called Load() to initialize and return a cMesh object.    
+- Change the constructor, deconstructor, and initialize function to private. 
+- Create a factory function called Load() to initialize and return a cMesh object.    
 
 3. Submitting Meshes and Effects pairs:  
-(1) In Graphics:  
+In Graphics:  
 Create SubmitMeshAndEffect() function and expose it to MyGame to receive the data. Then cache those meshes and effects into s_DataBeingSubmittedByApplicationThread. Since we are using two copies of the data to synchronize the application loop thread and the render thread. We can’t render the data directly and have to cache it first. After the previous frame is rendered, the cached data will be swap to the current rendering data and then the current frame will be rendered.  
-(2) In MyGame:  
+In MyGame:  
 Initialize all meshes and effects data in SubmitDataToBeRendered() function by creating array of meshdata and effectdata struct. Then invoke SubmitMeshAndEffectData() function to submit the data to render thread. 
 The usage of the interface looks as following:
 ```cpp
