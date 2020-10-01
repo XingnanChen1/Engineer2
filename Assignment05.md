@@ -3,8 +3,8 @@
 
 ### Downloads: 
 
-[MyGame_x86](https://github.com/XingnanChen/Engineer2/blob/master/Assignment04/MyGame_OpenGL.zip?raw=true)  
-[MyGame_x64](https://github.com/XingnanChen/Engineer2/blob/master/Assignment04/MyGame_D3D.zip?raw=true)
+[MyGame_x86](https://github.com/XingnanChen/Engineer2/blob/master/Assignment05/MyGame_x86.zip?raw=true)  
+[MyGame_x64](https://github.com/XingnanChen/Engineer2/blob/master/Assignment05/MyGame_x64.zip?raw=true)
 
 
 ### Assignment Objectives：
@@ -14,7 +14,7 @@
 
 ### ScreenShots
 Game Running  
-![Image](Assignment04/gamerunning.gif)  
+![Image](Assignment05/gamerunning.gif)  
 
 We can see from the gif the user can move the camera around by w,a,s,d and can control the above object with arrow keys.
 When user press F4. The mesh above will switch it's mesh from a square to a triangle.
