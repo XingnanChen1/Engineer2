@@ -30,10 +30,9 @@ Use object class as an example:
 //todo put the object class code here  
 ```cpp  
 ```  
-There are three member variables: m_mesh to save the object mesh data such as vertex data, m_effect to save the effect data such as shader data, and m_rigid_body to save the object physics data such as velocity.   
-When we create a class, we can regard those stuff as unity. It’s easier for programmers to create new objects by using a class instead of changing arrays.  
-//todo:  
-Explain why extrapolation/prediction is necessary when rendering with our engine? (How does the simulation update relate to rendering?)  
+There are three member variables: m_mesh to save the object mesh data such as vertex data, m_effect to save the effect data such as shader data, and m_rigid_body to save the object physics data such as position and velocity.   
+When we create a class. it’s easier for programmers to create new objects by using a class instead of changing arrays.  
+We have to render the game frame by frame, so extrapolation on position of the object is necessary to draw the object precisely on each frame.  
 
 - Change the logic in cMyGame and Graphics by using the object class  
 //todo:put the code in mygame 
